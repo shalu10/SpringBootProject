@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.food.entity.Book;
 import com.food.entity.Student;
 import com.food.entity.User;
+import com.food.entity.UserData;
 import com.food.repository.BookRepository;
 import com.food.repository.StudentRepository;
+import com.food.repository.UserDataRepository;
 import com.food.repository.UserRepository;
 
 @RestController
@@ -34,7 +36,21 @@ public class UserController {
 	
 	@Autowired
 	BookRepository bookRepo;
+
+	@Autowired
+	UserDataRepository userDataRepo;
 	
+
+	@PostMapping("/createData")
+	public ResponseEntity<?> createUserData(@RequestBody UserData user)
+	
+	{
+		UserData u = userDataRepo.save(user);
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(u);
+		
+		
+	}
 	
 	@PostMapping("/create")
 	public ResponseEntity<?> createUser(@RequestBody User user)
